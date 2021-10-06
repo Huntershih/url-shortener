@@ -27,6 +27,15 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.get('/:short', (req, res) => {
+  const shortcode = req.params.short
+  UrlShorteners.find({ short: { $regex: shortcode } })
+    .lean()
+    .then(url => res.redirect(url[0].origin))
+    .catch(error => console.log(error))
+})
+
+
 app.listen(port, () => {
   console.log(`The server is running at localhost:${port}`)
 })
