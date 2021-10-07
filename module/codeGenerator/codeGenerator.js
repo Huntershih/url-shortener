@@ -1,8 +1,9 @@
 const upperCases = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 const lowerCases = upperCases.toLowerCase()
-const letters = [...upperCases, ...lowerCases]
+const numbers = '1234567890'
+const letters = [...upperCases, ...lowerCases, ...numbers]
 
-function generateCode(length) {
+const generateCode = (length) => {
   let code = []
   for (let i = 0; i < length; i++) {
     let index = Math.floor(Math.random() * letters.length)
