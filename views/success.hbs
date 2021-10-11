@@ -1,3 +1,11 @@
-<h2>Success! Your shortend URL is at localhost://{{short}} </h2>
-<button>Copy Shortend URL</button>
+<h2>Success! Your shortend URL is at <i type='text' id='shortURL'>localhost://{{short}}</i></h2>
+<button data-clipboard-target="#shortURL" data-clipboard-acrtion="cut" id="copyBtn">Copy Shortend URL</button>
 <a href="/"><button>Make another shortend URL</button></a>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<script>
+  let clipBoard = new ClipboardJS('#copyBtn')
+</script>

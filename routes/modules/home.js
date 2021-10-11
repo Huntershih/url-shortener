@@ -3,6 +3,23 @@ const shortUrlGenerator = require('../../modules/codeGenerator/codeGenerator')
 const UrlShorteners = require('../../models/urlShortener')
 const routers = express.Router()
 
+routers.get('/:short', (req, res) => {
+  const short = req.params.short
+  UrlShorteners.find({ short })
+    .lean()
+    .then(data => {
+      //如果短網址不存在
+      if (data.length === 0) {
+        //顯示"the link is not available"       
+        res.render('na', { short })
+      } else {
+        //如果短網址存在 - 導向到資料庫內儲存的網址
+        res.redirect(`${data.origin}`)
+      }
+    })
+    .catch(error => console.log(error))
+})
+
 
 routers.get('/', (req, res) => {
   res.render('index')
@@ -12,7 +29,7 @@ routers.post('/', (req, res) => {
   const origin = req.body.url
   let newShort = shortUrlGenerator(5)
 
-  UrlShorteners.find({ origin })
+  UrlShorteners.findOne({ origin })
     .lean()
     .then(data => {
       //如果資料庫沒有資料
@@ -33,21 +50,5 @@ routers.post('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
-routers.get('/:short', (req, res) => {
-  const short = req.params.short
-  UrlShorteners.find({ short })
-    .lean()
-    .then(data => {
-      //如果短網址不存在
-      if (data.length === 0) {
-        //顯示"the link is not available"       
-        res.render('na', { short })
-      } else {
-        //如果短網址存在 - 導向到資料庫內儲存的網址
-        res.redirect(`${data.origin}`)
-      }
-    })
-    .catch(error => console.log(error))
-})
 
 module.exports = routers
