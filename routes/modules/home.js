@@ -1,7 +1,10 @@
 const express = require('express')
+const validUrl = require('valid-url')
 const shortUrlGenerator = require('../../modules/codeGenerator/codeGenerator')
 const UrlShorteners = require('../../models/urlShortener')
 const routers = express.Router()
+
+
 
 routers.get('/:short', (req, res) => {
   const short = req.params.short
@@ -29,7 +32,11 @@ routers.post('/', (req, res) => {
   const origin = req.body.url
   let newShort = shortUrlGenerator(5)
 
-  UrlShorteners.findOne({ origin })
+  if (!validUrl.isUri(origin))
+    res.status(418).send("InvalidURL")
+
+  //確認網址型態
+  UrlShorteners.find({ origin })
     .lean()
     .then(data => {
       //如果資料庫沒有資料
@@ -44,10 +51,12 @@ routers.post('/', (req, res) => {
       } else {
         //如果資料庫有資料
         //顯示已有記錄
-        res.redirect(`/success/${data.short}`)
+        res.redirect(`/success/${data[0].short}`)
       }
     })
     .catch(err => console.log(err))
+
+
 })
 
 

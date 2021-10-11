@@ -2,6 +2,7 @@ const express = require('express')
 const routers = express.Router()
 const UrlShorteners = require('../../models/urlShortener')
 
+
 routers.get('/:short', (req, res) => {
   const short = req.params.short
   UrlShorteners.find({ short })
