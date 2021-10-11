@@ -4,12 +4,12 @@ const numbers = '1234567890'
 const letters = [...upperCases, ...lowerCases, ...numbers]
 
 const generateCode = (length) => {
-  let code = []
+  let code = ''
   for (let i = 0; i < length; i++) {
     let index = Math.floor(Math.random() * letters.length)
-    code.push(letters[index])
+    code += letters[index]
   }
-  return code.join('').toString()
+  return code
 }
 
 module.exports = generateCode

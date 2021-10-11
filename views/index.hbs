@@ -1,13 +1,4 @@
 <form action="/" method="POST">
-  <input type="url" placeholder="url" name="url" value="{{origin}}">
+  <input type="url" placeholder="url" name="url">
   <button type="submit">Submit</button>
 </form>
-
-<div>
-  <h3 "display:inline;">你的短網址為:</h3>
-  {{#if data}}
-  <h4 style="display:inline;">localhost://{{ data.short}} </h4>
-  {{else}}
-  <h4 style="display:inline;">localhost://{{ newShort }} </h4>
-  {{/if}}
-</div>
