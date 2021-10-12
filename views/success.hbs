@@ -1,11 +1,22 @@
-<h2>Success! Your shortend URL is at <b type='text' id='shortURL'>localhost://{{short}}</b></h2>
-<button data-clipboard-target="#shortURL" data-clipboard-acrtion="cut" id="copyBtn">Copy Shortend URL</button>
-<a href="/"><button>Make another shortend URL</button></a>
+<div class="container">
+  <div class="d-flex flex-column align-items-center">
+    <h2>Success!</h2>
+    <p>Your shortend URL is at</p>
+  </div>
+  <div>
+    <div class="input-group">
+      <input type="text" class="form-control" id='shortURL' value="localhost:3000/{{short}}" readonly>
+      <div class="input-group-append" id="button-addon4">
+        <button class="btn btn-success" type="button" data-clipboard-target="#shortURL" data-clipboard-acrtion="cut"
+          id="copyBtn">Copy URL</button>
+        <a href="/"><button class="btn btn-outline-secondary" type="button">Make another</button></a>
+      </div>
+    </div>
 
+  </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-
-<script>
-  let clipBoard = new ClipboardJS('#copyBtn')
-</script>
+  <script>
+    let clipBoard = new ClipboardJS('#copyBtn')
+  </script>
