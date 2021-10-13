@@ -6,6 +6,7 @@ User can input any URL and generate a 5-character short code link.
 
 * Node.js
 * Express.js
+* express-handlebars
 * Nodeman
 * MongoDB
 * Mongoose
